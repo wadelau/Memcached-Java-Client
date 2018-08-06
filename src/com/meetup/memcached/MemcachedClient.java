@@ -548,6 +548,19 @@ public class MemcachedClient {
 	 * @param key key to store data under
 	 * @param value value to store
 	 * @param expiry when to expire the record
+	 * @return true, if the data was successfully stored
+	 */
+	public boolean set( String key, Object value, int expirySecond ) {
+		Date expiry = new Date((System.currentTimeMillis)/1000 + expirySecond);
+		return set( "set", key, value, expiry, null, primitiveAsString );
+	}
+	
+	/**
+	 * Stores data on the server; the key, value, and an expiration time are specified.
+	 *
+	 * @param key key to store data under
+	 * @param value value to store
+	 * @param expiry when to expire the record
 	 * @param hashCode if not null, then the int hashcode to use
 	 * @return true, if the data was successfully stored
 	 */
